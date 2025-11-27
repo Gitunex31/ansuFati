@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">RechargeStatut.com</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* --- Styles simplifiés --- */
+    body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: #f7f7f7; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { margin: 0; font-weight: 600; }
+    header { background: #222; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    nav a { margin: 0 10px; font-weight: 500; color: white; }
+    nav a:hover { color: #0d6efd; }
+    .custom-language-selector { position: relative; cursor: pointer; margin-top: 10px; }
+    .selected-lang { display: flex; align-items: center; gap: 8px; background: darkslategrey; border: 1px solid #ccc; padding: 6px 12px; border-radius: 6px; }
+    .selected-lang img { width: 20px; }
+    .lang-options { position: absolute; right: 0; background: darkslategrey; border: 1px solid #ccc; border-radius: 6px; margin-top: 8px; padding: 0; list-style: none; display: none; width: 160px; z-index: 10; flex-direction: column; }
+    .lang-options li { padding: 10px; display: flex; align-items: center; gap: 8px; cursor: pointer; border-bottom: 1px solid #555; color: white; }
+    .lang-options li:hover { background: lightslategrey; }
+    .lang-options img { width: 20px; }
+    .hero-section { background-color: lightblue; padding: 100px 20px; text-align: center; }
+    .hero-section h1 { font-size: 2.5rem; }
+    .btn-primary { background-color: #333; color: white; padding: 10px 20px; display: inline-block; margin-top: 20px; border-radius: 4px; }
+    .btn-primary:hover { background-color: #555; color: white; text-decoration: none; }
+    .gallery { padding: 60px 20px; }
+    .gallery h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .gallery-grid img { width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: block; margin: auto; }
+    @media (min-width: 1024px) { .gallery-grid img { width: 80%; } }
+    .faq { padding: 60px 20px; background-color: #f8f9fa; }
+    .faq h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; }
+    .accordion-item { background: white; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); overflow: hidden; }
+    .accordion-button { width: 100%; text-align: left; padding: 18px 20px; font-weight: bold; font-size: 1.15rem; background-color: #e9ecef; border: none; cursor: pointer; }
+    .accordion-button.collapsed { background-color: #f1f1f1; }
+    .accordion-body { display: none; padding: 18px 20px; font-size: 1rem; color: #333; }
+    .accordion-body.show { display: block; }
+    footer { background-color: #222; color: white; padding: 25px 20px; text-align: center; }
+    footer a { margin: 0 10px; color: white; }
+    footer p { font-size: 0.75rem; margin-top: 10px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <a href="#" data-i18n="nav_home">Accueil</a>
+      <a href="#galerie" data-i18n="nav_galerie">Galerie</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    </nav>
+
+    <div class="custom-language-selector">
+      <div class="selected-lang" onclick="toggleLangMenu()">
+        <img src="https://flagcdn.com/w20/fr.png" alt="FR">
+        <span>Français</span>
+      </div>
+
+      <ul class="lang-options" id="langList">
+        <li onclick="setLang('fr','Français','fr')"><img src="https://flagcdn.com/w20/fr.png"> Français</li>
+        <li onclick="setLang('en','English','gb')"><img src="https://flagcdn.com/w20/gb.png"> English</li>
+        <li onclick="setLang('es','Español','es')"><img src="https://flagcdn.com/w20/es.png"> Español</li>
+        <li onclick="setLang('de','Deutsch','de')"><img src="https://flagcdn.com/w20/de.png"> Deutsch</li>
+        <li onclick="setLang('it','Italiano','it')"><img src="https://flagcdn.com/w20/it.png"> Italiano</li>
+        <li onclick="setLang('pt','Português','pt')"><img src="https://flagcdn.com/w20/pt.png"> Português</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <h1 data-i18n="hero_title">Bienvenue sur RechargeStatut.com</h1>
+    <p data-i18n="hero_subtitle">Vérifiez rapidement l’authenticité de vos tickets, cartes ou codes d’achat.</p>
+    <a href="#galerie" class="btn-primary" data-i18n="btn_explore">Découvrir nos offres</a>
+  </section>
+
+  <!-- GALERIE -->
+  <section id="galerie" class="gallery">
+    <div class="gallery-grid">
+      <a href="form.html"><img src="img/carte-itunes.jpg" alt="iTunes" data-i18n="itunes"></a>
+      <a href="form.html"><img src="img/steam.jpg" alt="Steam" data-i18n="steam"></a>
+      <a href="form.html"><img src="img/google_play.jpg" alt="Google Play" data-i18n="google_play"></a>
+      <a href="form.html"><img src="img/PaySafeCard.jpg" alt="Paysafe Card" data-i18n="paysafecard"></a>
+      <a href="form.html"><img src="img/Amazon.jpg" alt="Amazon" data-i18n="amazon"></a>
+      <a href="form.html"><img src="img/transcash.png" alt="Transcash" data-i18n="transcash"></a>
+      <a href="form.html"><img src="img/pcs.png" alt="PCS" data-i18n="pcs"></a>
+      <a href="form.html"><img src="img/neosurf.jpg" alt="Neosurf" data-i18n="neosurf"></a>
+      <a href="form.html"><img src="img/Playstation_store.jpg" alt="Playstation Store" data-i18n="playstation_store"></a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <h2 data-i18n="faq_title">FAQ</h2>
+    <div class="accordion-container">
+      <div class="accordion-item">
+        <button class="accordion-button" data-i18n="faq1_q" onclick="toggleFAQ(this)">Qu'est-ce qu’un ticket de recharge ou un ticket prépayé ?</button>
+        <div class="accordion-body" data-i18n="faq1_a">C’est un code prépayé utilisé comme moyen de paiement. Il fonctionne sans compte bancaire. Pratique pour les achats en ligne sécurisés.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" data-i18n="faq2_q" onclick="toggleFAQ(this)">Est-ce que ce service est gratuit ?</button>
+        <div class="accordion-body" data-i18n="faq2_a">Oui, la vérification est totalement gratuite.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" data-i18n="faq3_q" onclick="toggleFAQ(this)">Quels types de cartes puis-je vérifier ?</button>
+        <div class="accordion-body" data-i18n="faq3_a">Vous pouvez vérifier des cartes Transcash, PCS, Neosurf, Steam, Google Play, Amazon et bien d'autres.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-button" data-i18n="faq4_q" onclick="toggleFAQ(this)">Comment recevoir un email de confirmation ?</button>
+        <div class="accordion-body" data-i18n="faq4_a">Indiquez une adresse email valide lors de la vérification. Vous recevrez automatiquement un message. Il vous informe du statut de votre ticket.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#galerie" data-i18n="footer_gallery">Galerie</a>
+    <a href="#faq" data-i18n="footer_faq">FAQ</a>
+    <a href="#contact" data-i18n="footer_contact">Contact</a>
+    <p data-i18n="footer_copyright">&copy; 2025 RechargeStatut.com – Tous droits réservés</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+</html>
