@@ -10,10 +10,10 @@ function toggleLangMenu() {
 // Objet de traduction fourni
 const translations = {
   fr: {
-    title: "RechargeStatut.com",
+    title: "Rechargecardstatus.fr",
     nav_home: "Accueil",
     lang_en: "English",
-    hero_title: "Bienvenue sur RechargeStatut.com",
+    hero_title: "Bienvenue sur Rechargecardstatus.fr",
     hero_subtitle: "Vérifiez rapidement l’authenticité de vos tickets, cartes ou codes d’achat.",
     btn_explore: "Découvrir nos offres",
     transcash: "Transcash",
@@ -37,13 +37,13 @@ const translations = {
     footer_gallery: "Galerie",
     footer_faq: "FAQ",
     footer_contact: "Contact",
-    footer_copyright: "© 2025 RechargeStatut.com Tous droits réservés."
+    footer_copyright: "© 2025 Rechargecardstatus.fr Tous droits réservés."
   },
   en: {
-    title: "RechargeStatut.com",
+    title: "Rechargecardstatus.fr",
     nav_home: "Home",
     lang_en: "English",
-    hero_title: "Welcome to RechargeStatut.com",
+    hero_title: "Welcome to Rechargecardstatus.fr",
     hero_subtitle: "Quickly check the authenticity of your tickets, cards, or purchase codes.",
     btn_explore: "Discover our offers",
     transcash: "Transcash",
@@ -67,13 +67,13 @@ const translations = {
     footer_gallery: "Gallery",
     footer_faq: "FAQ",
     footer_contact: "Contact",
-    footer_copyright: "© 2025 RechargeStatut.com All rights reserved."
+    footer_copyright: "© 2025 Rechargecardstatus.fr All rights reserved."
   },
   es: {
-    title: "RechargeStatut.com",
+    title: "Rechargecardstatus.fr",
     nav_home: "Inicio",
     lang_en: "Inglés",
-    hero_title: "Bienvenido a RechargeStatut.com",
+    hero_title: "Bienvenido a Rechargecardstatus.fr",
     hero_subtitle: "Verifique rápidamente la autenticidad de sus boletos, tarjetas o códigos de compra.",
     btn_explore: "Descubra nuestras ofertas",
     transcash: "Transcash",
@@ -97,13 +97,13 @@ const translations = {
     footer_gallery: "Galería",
     footer_faq: "Preguntas",
     footer_contact: "Contacto",
-    footer_copyright: "© 2025 RechargeStatut.com Todos los derechos reservados."
+    footer_copyright: "© 2025 Rechargecardstatus.fr Todos los derechos reservados."
   },
   de: {
-    title: "RechargeStatut.com",
+    title: "Rechargecardstatus.fr",
     nav_home: "Startseite",
     lang_en: "Englisch",
-    hero_title: "Willkommen bei RechargeStatut.com",
+    hero_title: "Willkommen bei Rechargecardstatus.fr",
     hero_subtitle: "Überprüfen Sie schnell die Echtheit Ihrer Tickets, Karten oder Einkaufscodes.",
     btn_explore: "Entdecken Sie unsere Angebote",
     transcash: "Transcash",
@@ -127,13 +127,13 @@ const translations = {
     footer_gallery: "Galerie",
     footer_faq: "FAQ",
     footer_contact: "Kontakt",
-    footer_copyright: "© 2025 RechargeStatut.com Alle Rechte vorbehalten."
+    footer_copyright: "© 2025 Rechargecardstatus.fr Alle Rechte vorbehalten."
   },
   it: {
-    title: "RechargeStatut.com",
+    title: "Rechargecardstatus.fr",
     nav_home: "Home",
     lang_en: "Inglese",
-    hero_title: "Benvenuto su RechargeStatut.com",
+    hero_title: "Benvenuto su Rechargecardstatus.fr",
     hero_subtitle: "Verifica rapidamente l'autenticità dei tuoi biglietti, carte o codici di acquisto.",
     btn_explore: "Scopri le nostre offerte",
     transcash: "Transcash",
@@ -157,13 +157,13 @@ const translations = {
     footer_gallery: "Galleria",
     footer_faq: "FAQ",
     footer_contact: "Contatto",
-    footer_copyright: "© 2025 RechargeStatut.com Tutti i diritti riservati."
+    footer_copyright: "© 2025 Rechargecardstatus.fr Tutti i diritti riservati."
   },
   pt: {
-    title: "RechargeStatut.com",
+    title: "Rechargecardstatus.fr",
     nav_home: "Início",
     lang_en: "Inglês",
-    hero_title: "Bem-vindo ao RechargeStatut.com",
+    hero_title: "Bem-vindo ao Rechargecardstatus.fr",
     hero_subtitle: "Verifique rapidamente a autenticidade dos seus bilhetes, cartões ou códigos de compra.",
     btn_explore: "Descubra nossas ofertas",
     transcash: "Transcash",
@@ -187,7 +187,7 @@ const translations = {
     footer_gallery: "Galeria",
     footer_faq: "FAQ",
     footer_contact: "Contato",
-    footer_copyright: "© 2025 RechargeStatut.com Todos os direitos reservados."
+    footer_copyright: "© 2025 Rechargecardstatus.fr Todos os direitos reservados."
   }
 };
 
