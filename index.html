@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="title">Rechargecardstatus.fr</title>
+  <title data-i18n="title">Rechstat.com</title>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -117,7 +117,7 @@
     }
 
     .hero-section {
-      background-color: lightblue;
+      background-color:gold;
       padding: 100px 20px;
       text-align: center;
     }
@@ -179,51 +179,78 @@
       }
     }
 
-    .faq {
-      padding: 60px 20px;
-      background-color: #f8f9fa;
-    }
+    /* ===== FAQ ===== */
+.faq {
+  width: 100%;
+  margin: 4rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
 
-    .faq h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
+.faq h2 {
+  margin-bottom: 2rem;
+}
 
-    .accordion-item {
-      background: white;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
+/* Le container prend toute la largeur */
+.accordion-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
-    .accordion-button {
-      width: 100%;
-      text-align: left;
-      padding: 18px 20px;
-      font-weight: bold;
-      font-size: 1.15rem;
-      background-color: #e9ecef;
-      border: none;
-      cursor: pointer;
-    }
+/* Chaque item remplit l'écran */
+.accordion-item {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+}
 
-    .accordion-button.collapsed {
-      background-color: #f1f1f1;
-    }
+/* Bouton */
+.accordion-button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1.2rem 4rem 1.2rem 1.5rem; /* espace à droite pour +/− */
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center; /* TEXTE CENTRÉ */
+  position: relative;
+}
 
-    .accordion-body {
-      display: none;
-      padding: 18px 20px;
-      font-size: 1rem;
-      color: #333;
-    }
+/* Icône + / − */
+.accordion-button::after {
+  content: "+";
+  position: absolute;
+  right: 1.5rem; /* empêche que ça colle */
+  top: 25%;
+  transform: translateY(-50%);
+  font-size: 1.6rem;
+}
 
-    .accordion-body.show {
-      display: block;
-    }
+.accordion-button.active::after {
+  content: "−";
+}
 
+/* Contenu */
+.accordion-body {
+  display: none;
+  padding: 0 2rem 1.5rem;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+  /* text-align: center;  TEXTE CENTRÉ */
+}
+
+.accordion-body.open {
+  display: block;
+}
+
+
+/* ===== FOOTER ===== */
     footer {
       background-color: #222;
       color: white;
@@ -271,7 +298,7 @@
 
   <!-- HERO -->
   <section class="hero-section">
-    <h1 data-i18n="hero_title">Bienvenue sur Rechargecardstatus.fr</h1>
+    <h1 data-i18n="hero_title">Bienvenue sur Rechstat.com</h1>
     <p data-i18n="hero_subtitle">Vérifiez rapidement l’authenticité de vos tickets, cartes ou codes d’achat.</p>
     <a href="#galerie" class="btn-primary" data-i18n="btn_explore">Découvrir nos offres</a>
   </section>
@@ -324,7 +351,6 @@
 
   <!-- FOOTER -->
   <footer>
-    <a href="#galerie" data-i18n="footer_gallery">Galerie</a>
     <a href="#faq" data-i18n="footer_faq">FAQ</a>
     <a href="#contact" data-i18n="footer_contact">Contact</a>
     <p data-i18n="footer_copyright">&copy; 2025 RechargeStatut.com – Tous droits réservés</p>
@@ -332,6 +358,24 @@
 
   <!-- JS -->
   <script src="script.js"></script>
+
+  <script>
+    function toggleFAQ(button) {
+      const body = button.nextElementSibling;
+
+      // Ferme les autres questions
+      document.querySelectorAll('.accordion-button').forEach(btn => {
+        if (btn !== button) {
+          btn.classList.remove('active');
+          btn.nextElementSibling.classList.remove('open');
+        }
+      });
+
+      // Ouvre / ferme celle cliquée
+      button.classList.toggle('active');
+      body.classList.toggle('open');
+    }
+  </script>
 
 </body>
 
