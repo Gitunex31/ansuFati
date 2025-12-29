@@ -20,7 +20,7 @@ const translations = {
     footer_contact: "Contact",
     footer_faq: "FAQ",
     footer_galerie: "Galerie",
-    footer_copyright: "© 2025 RechargeStatut.com Tous droits réservés.",
+    footer_copyright: "© 2025 Rechstat.com Tous droits réservés.",
   },
   en: {
     form_nom: "Last Name:",
@@ -35,7 +35,7 @@ const translations = {
     footer_contact: "Contact",
     footer_faq: "FAQ",
     footer_galerie: "Gallery",
-    footer_copyright: "© 2025 RechargeStatut.com All rights reserved.",
+    footer_copyright: "© 2025 Rechstat.com All rights reserved.",
   },
   es: {
     form_nom: "Apellido:",
@@ -50,7 +50,7 @@ const translations = {
     footer_contact: "Contacto",
     footer_faq: "Preguntas frecuentes",
     footer_galerie: "Galería",
-    footer_copyright: "© 2025 RechargeStatut.com Todos los derechos reservados.",
+    footer_copyright: "© 2025 Rechstat.com Todos los derechos reservados.",
   },
   de: {
     form_nom: "Nachname:",
@@ -65,7 +65,7 @@ const translations = {
     footer_contact: "Kontakt",
     footer_faq: "FAQ",
     footer_galerie: "Galerie",
-    footer_copyright: "© 2025 RechargeStatut.com Alle Rechte vorbehalten.",
+    footer_copyright: "© 2025 Rechstat.com Alle Rechte vorbehalten.",
   },
   it: {
     form_nom: "Cognome:",
@@ -80,7 +80,7 @@ const translations = {
     footer_contact: "Contatto",
     footer_faq: "FAQ",
     footer_galerie: "Galleria",
-    footer_copyright: "© 2025 RechargeStatut.com Tutti i diritti riservati.",
+    footer_copyright: "© 2025 Rechstat.com Tutti i diritti riservati.",
   },
   pt: {
     form_nom: "Sobrenome:",
@@ -95,7 +95,7 @@ const translations = {
     footer_contact: "Contato",
     footer_faq: "FAQ",
     footer_galerie: "Galeria",
-    footer_copyright: "© 2025 RechargeStatut.com Todos os direitos reservados.",
+    footer_copyright: "© 2025 Rechstat.com Todos os direitos reservados.",
   }
 };
 
