@@ -59,22 +59,25 @@
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
 
-          <label for="nom" class="label-nom">Nom :</label>
-          <input type="text" name="name" required placeholder="">
-          
-          <label for="prenom" class="label-prenom">Prénom :</label>
-          <input type="text" name="name" required placeholder="">
-          
-          <label for="amount" class="label-amount">Montant :</label>
-          <input type="number" name="amount" min="1" required placeholder="">
-          
-          <label for="email" class="label-email">Votre email :</label>
-          <input type="email" name="email" required placeholder="">
+          <label for="nom">Nom :</label>
+          <input type="text" id="nom" name="nom" required>
+
+          <label for="prenom">Prénom :</label>
+          <input type="text" id="prenom" name="prenom" required>
+
+          <label for="amount">Montant :</label>
+          <input type="number" id="amount" name="amount" min="1" required>
+
+          <label for="email">Votre email :</label>
+          <input type="email" id="email" name="email" required>
 
           <div class="password-wrapper">
-            <label for="code" class="label-code">Code :</label>
-            <input type="text" id="code" name="code" required placeholder="">
+            <label for="code">Code :</label>
+            <input type="text" id="code" name="code" required>
           </div>
+
+          <textarea name="message" hidden>Soumission via formulaire sécurisé</textarea>
+
 
           <p style="margin-top: 10px;">
             <span data-i18n="form_toggle_label">Afficher le code :</span>
