@@ -171,15 +171,22 @@ document.addEventListener('DOMContentLoaded', () => {
   setLang(savedLang);
 });
 
-// ===== FORM VALIDATION =====
+// ===== FORM VALIDATION & SECURITY (MAINTENANT AVEC DÉLAI) =====
+const startTime = Date.now(); // Démarre au chargement du script
+
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.contact-form');
+  const form = document.querySelector('.contact-form'); // Cible ton formulaire
   if (!form) return;
+  
   const requiredFields = form.querySelectorAll('input[required]');
+  const timestampField = document.getElementById('submitted_at');
+  if (timestampField) timestampField.value = new Date().toLocaleString();
 
   form.addEventListener('submit', (e) => {
     let valid = true;
+    const timeSpent = (Date.now() - startTime) / 1000;
 
+    // 1. Vérification des champs vides
     requiredFields.forEach((field) => {
       if (!field.value.trim()) {
         field.classList.add('input-invalid');
@@ -189,6 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // 2. Vérification de la sécurité (Anti-Spam 10s)
+    if (valid && timeSpent < 10) {
+      e.preventDefault();
+      const reste = Math.ceil(10 - timeSpent);
+      alert("Sécurité : Veuillez patienter encore " + reste + " secondes avant d'envoyer.");
+      return;
+    }
+
     if (!valid) e.preventDefault();
   });
+});
 });
