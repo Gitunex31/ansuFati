@@ -138,14 +138,3 @@
 
 </body>
 </html>
-let startTime = Date.now();
-
-document.getElementById('monFormulaire').onsubmit = function(e) {
-    let endTime = Date.now();
-    let timeSpent = (endTime - startTime) / 1000; // Temps en secondes
-
-    if (timeSpent < 10) { // Si moins de 10 secondes
-        e.preventDefault();
-        alert("Veuillez prendre le temps de remplir correctement le formulaire.");
-    }
-};
