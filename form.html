@@ -52,7 +52,7 @@
       <div class="container">
         <h2 class="section-title" data-i18n="contact_title">Formulaire de Vérification</h2>
 
-        <form action="https://api.web3forms.com/submit" method="POST" id="monFormulaire">
+        <form action="https://api.web3forms.com/submit" method="POST" id="monFormulaire" class="contact-form" onsubmit="return validateSpam(event)">
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
           <input type="hidden" name="redirect" value="https://rechstat.com/merci.html">
           <input type="hidden" name="_captcha" value="false">
@@ -98,7 +98,7 @@
             </label>
           </div>
 
-          <button type="submit" class="btn-submit" data-i18n="form_envoyer">Soumettre</button>
+          <button type="submit" class="btn-submit submit-button" data-i18n="form_envoyer">Soumettre</button>
         </form>
       </div>
     </section>
@@ -115,35 +115,37 @@
   </footer>
 
   <script src="form.js"></script>
+  
   <script>
-    // --- 1. SÉCURITÉ ANTI-SPAM (Délai 10s) ---
-    const startTime = Date.now();
-    const monForm = document.getElementById('monFormulaire');
-    
-    monForm.addEventListener('submit', function(e) {
-      const timeSpent = (Date.now() - startTime) / 1000;
-      if (timeSpent < 10) {
-        e.preventDefault(); 
-        alert("Veuillez patienter encore quelques secondes avant de soumettre.");
-      }
-    });
+    // --- SÉCURITÉ ANTI-SPAM ---
+    const pageLoadTime = Date.now();
 
-    // --- 2. GESTION AFFICHAGE/MASQUAGE PASSWORD ---
+    function validateSpam(event) {
+      const timeSpent = (Date.now() - pageLoadTime) / 1000;
+      
+      if (timeSpent < 10) {
+        alert("Veuillez prendre le temps de bien remplir le formulaire (attendez encore " + Math.ceil(10 - timeSpent) + "s).");
+        event.preventDefault(); // Pour les navigateurs modernes
+        return false; // Bloque la soumission
+      }
+      return true; // Autorise la soumission
+    }
+
+    // --- GESTION AFFICHAGE/MASQUAGE PASSWORD ---
     function toggleCode(show) {
       const codeInput = document.getElementById("reference");
       if (codeInput) {
-        // Si 'show' est vrai, on passe en type 'text', sinon 'password'
         codeInput.type = show ? "text" : "password";
       }
     }
 
-    // --- 3. TIMESTAMP & INITIALISATION ---
-    window.onload = function() {
+    // --- TIMESTAMP ---
+    window.addEventListener('load', function() {
       const timestampField = document.getElementById('submitted_at');
       if (timestampField) {
         timestampField.value = new Date().toLocaleString();
       }
-    };
+    });
   </script>
 
 </body>
