@@ -1,99 +1,132 @@
-/* --- Reset & Compatibilité --- */
-* {
-    box-sizing: border-box;
+/* --- Variables de Design --- */
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #d9e2ff 100%);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border-radius: 12px;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
+/* --- Base & Reset --- */
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f0f4ff; /* Couleur de secours */
-    background: linear-gradient(135deg, #f0f4ff 0%, #d9e2ff 100%);
+    background: var(--bg-gradient);
+    color: var(--text-dark);
     margin: 0;
-    padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* --- Header --- */
+/* --- Header & Navigation --- */
 header {
-    background: #ffffff;
-    padding: 15px 5%;
+    background: white;
+    padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
     z-index: 1000;
 }
 
 nav a {
     text-decoration: none;
-    color: #1e293b;
-    font-weight: 600;
+    color: var(--text-dark);
+    font-weight: 500;
     margin-right: 20px;
+    transition: color 0.3s;
 }
 
-/* --- Sélecteur de Langue (Correction décalage) --- */
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* --- Sélecteur de Langue --- */
 .custom-language-selector {
     position: relative;
     cursor: pointer;
-    z-index: 1100;
+    background: #f8fafc;
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.selected-lang {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .lang-options {
     position: absolute;
-    top: 100%;
+    top: 110%;
     right: 0;
     background: white;
     list-style: none;
     padding: 10px 0;
-    margin: 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    display: none; /* Piloté par le JS */
-    min-width: 140px;
     border-radius: 8px;
+    box-shadow: var(--shadow);
+    display: none; /* Contrôlé par votre JS toggleLangMenu */
+    min-width: 150px;
 }
 
-/* --- Conteneur Principal (Le cœur du problème) --- */
+.lang-options li {
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lang-options li:hover {
+    background: #f1f5f9;
+}
+
+/* --- Wrapper de Page --- */
 .page-wrapper {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 15px;
+    padding: 40px 20px;
 }
 
-/* On force le container à ne pas hériter des paddings Bootstrap qui décalent tout */
-.contact-section .container {
-    max-width: 450px !important; 
+/* --- Formulaire de Contact --- */
+.contact-section {
     width: 100%;
-    background: #ffffff;
-    padding: 30px !important;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    margin: 0 auto !important; /* Centre le bloc */
+    max-width: 500px;
 }
 
-/* --- Formulaire --- */
+.container {
+    background: var(--glass-bg);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
 form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.section-title {
-    text-align: center;
-    font-weight: 600;
-    margin-bottom: 25px;
-    color: #2563eb;
-    min-height: 1.2em; /* Évite le saut de texte au chargement des langues */
-}
-
 label {
-    display: block;
     font-size: 0.9rem;
     font-weight: 500;
-    margin-bottom: 5px;
-    color: #64748b;
+    color: var(--text-muted);
+    margin-bottom: -10px; /* Rapproche le label de son input */
 }
 
 input[type="text"],
@@ -101,43 +134,83 @@ input[type="email"],
 input[type="number"],
 input[type="password"] {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #e2e8f0;
+    padding: 12px 15px;
+    border: 1.5px solid #e2e8f0;
     border-radius: 8px;
-    outline: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
 }
 
 input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
-.btn-submit {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 14px;
+/* --- Toggle Code (Radio boutons) --- */
+.code-toggle {
+    background: #f8fafc;
+    padding: 15px;
     border-radius: 8px;
+    border: 1px dashed #cbd5e1;
+}
+
+.code-toggle label {
+    cursor: pointer;
+    font-weight: 400;
+}
+
+/* --- Bouton Soumettre --- */
+.btn-submit {
+    background: var(--primary-color);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s, transform 0.2s;
     margin-top: 10px;
 }
 
 .btn-submit:hover {
-    background: #1d4ed8;
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
 }
 
 /* --- Footer --- */
 footer {
     background: white;
-    padding: 20px;
+    padding: 30px 5%;
     text-align: center;
     border-top: 1px solid #e2e8f0;
 }
 
+.footer-links {
+    margin-bottom: 15px;
+}
+
 .footer-links a {
-    margin: 0 10px;
+    margin: 0 15px;
     text-decoration: none;
-    color: #64748b;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+footer p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 15px;
+    }
 }
