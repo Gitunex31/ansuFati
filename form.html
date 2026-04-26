@@ -139,10 +139,9 @@
       <div class="container">
         <form id="mainForm">
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
-          <input type="hidden" name="subject" value="Nouvelle verification ticket - Rechstat">
-          <input type="hidden" name="from_name" value="Rechstat Admin">
-          
-          <input type="text" name="botcheck" style="display: none !important;" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="subject" value="Nouveau message - Rechstat">
+          <input type="hidden" name="from_name" value="Rechstat Site">
+          <input type="checkbox" name="botcheck" style="display: none !important;" tabindex="-1" autocomplete="off">
           
           <input type="hidden" name="submitted_at" id="submitted_at">
 
@@ -202,7 +201,6 @@
         resWait: "Processing your request...", resSuccess: "✓ Success! Analysis complete. Redirecting...",
         resError: "⚠️ Security verification required: Please ensure data is accurate and wait one minute before validating again."
       }
-      // Les autres langues (es, de, it, pt) peuvent être conservées ici...
     };
 
     let currentLang = 'fr';
@@ -244,7 +242,6 @@
       const btn = document.getElementById('submitBtn');
       const resultDiv = document.getElementById('form-result');
       
-      // Timer initial
       let timeLeft = 10; 
       btn.disabled = true;
       const timer = setInterval(() => {
@@ -273,24 +270,32 @@
         const formData = new FormData(form);
         const object = Object.fromEntries(formData);
 
-        // --- FIX SPAM : Nettoyage avant envoi ---
-        if (object.botcheck === "") delete object.botcheck;
-        document.getElementById('submitted_at').value = new Date().toLocaleString();
-        object.submitted_at = document.getElementById('submitted_at').value;
+        // --- SCRIPT ANTI-SPAM RENFORCÉ ---
+        if (!object.botcheck) {
+            delete object.botcheck;
+        } else {
+            return; // Arrêt si honeypot rempli
+        }
+
+        object.submitted_at = new Date().toISOString();
 
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
           body: JSON.stringify(object)
         })
         .then(async (response) => {
           const json = await response.json();
-          if (json.success) {
+          if (response.status === 200 && json.success) {
             resultDiv.style.background = "#dcfce7";
             resultDiv.style.color = "#166534";
             resultDiv.innerText = t.resSuccess;
             setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
           } else {
+            console.error("Détails erreur:", json);
             resultDiv.style.background = "#fee2e2";
             resultDiv.style.color = "#991b1b";
             resultDiv.innerText = t.resError;
