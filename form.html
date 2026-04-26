@@ -336,15 +336,12 @@
             resultDiv.style.color = "var(--success)";
             resultDiv.innerText = t.resSuccess;
             setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
-          } else {
-            // ERREUR OU REJET
-            resultDiv.style.background = "#fee2e2";
-            resultDiv.style.color = "var(--error)";
-            // On affiche ton message d'avertissement personnalisé
-            resultDiv.innerText = t.resError;
-            btn.disabled = false;
-            btn.innerText = t.btnRetry;
-          }
+          } } else {
+    // Remplacer t.resError par le message réel du serveur pour voir le souci
+    resultDiv.innerText = json.message; 
+    btn.disabled = false;
+    btn.innerText = t.btnRetry;
+}
         })
         .catch(error => {
           resultDiv.innerText = "Erreur de connexion.";
