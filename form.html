@@ -282,7 +282,82 @@
         const menu = document.getElementById('langOptions');
         if (menu) menu.style.display = 'none';
     }
+    window.onload = function() {
+      const form = document.getElementById('mainForm');
+      const btn = document.getElementById('submitBtn');
+      const resultDiv = document.getElementById('form-result');
+      
+      // Timer d'initialisation (identique au tien)
+      let timeLeft = 10; 
+      btn.disabled = true;
+      const timer = setInterval(() => {
+        timeLeft--;
+        const t = translations[currentLang];
+        if (timeLeft > 6) btn.innerText = t.btnInit;
+        else if (timeLeft > 3) btn.innerText = t.btnWait;
+        else if (timeLeft > 0) btn.innerText = t.btnFinal;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          btn.disabled = false;
+          btn.innerText = t.btnSubmit;
+        }
+      }, 1000);
 
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const t = translations[currentLang];
+        
+        btn.disabled = true;
+        btn.innerText = t.btnProcessing;
+        resultDiv.style.display = "block";
+        resultDiv.style.background = "#f1f5f9";
+        resultDiv.innerText = t.resWait;
+
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+
+        // --- CORRECTION ANTI-SPAM ---
+        // On supprime le champ botcheck de l'envoi s'il est vide
+        if (object.botcheck === "") {
+            delete object.botcheck;
+        }
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(object)
+        })
+        .then(async (response) => {
+          const json = await response.json();
+          
+          if (json.success) {
+            resultDiv.style.background = "#dcfce7";
+            resultDiv.style.color = "#166534";
+            resultDiv.innerText = t.resSuccess;
+            setTimeout(() => { window.location.href = "https://rechstat.com/merci.html"; }, 2000);
+          } else {
+            // Si le serveur répond "Spam", on affiche ton message de sécurité
+            console.warn("Erreur API:", json.message);
+            resultDiv.style.background = "#fee2e2";
+            resultDiv.style.color = "#991b1b";
+            resultDiv.innerText = t.resError;
+            btn.disabled = false;
+            btn.innerText = t.btnRetry;
+          }
+        })
+        .catch(error => {
+          resultDiv.innerText = "Erreur de connexion.";
+          btn.disabled = false;
+        });
+      });
+    };
+
+    // Fonctions toggleCode et LangMenu (Garde les tiennes)
+    function toggleCode(show) { document.getElementById("reference").type = show ? "text" : "password"; }
+    function toggleLangMenu() {
+        const menu = document.getElementById('langOptions');
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+/*
     window.onload = function() {
       const form = document.getElementById('mainForm');
       const btn = document.getElementById('submitBtn');
@@ -352,7 +427,7 @@
           btn.innerText = t.btnRetry;
         });
       });
-    };
+    }; */
   </script>
 </body>
 </html>
